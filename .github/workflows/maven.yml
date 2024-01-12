@@ -130,4 +130,4 @@ jobs:
 #        if: failure()
         with:
           name: ${{ github.run_number }}-integration-test-artifact-${{ matrix.os }}-${{ matrix.java }}
-          path: ./maven-integration-testing/core-it-suit/target/test-classes/
+          path: /home/runner/work/maven/maven/maven-integration-testing/core-it-suit/target/test-classes/
