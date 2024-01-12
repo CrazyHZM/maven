@@ -125,9 +125,9 @@ jobs:
         shell: bash
         run: mvn install -e -B -V -Prun-its,embedded -DmavenDistro="$GITHUB_WORKSPACE/maven/apache-maven/target/apache-maven-bin.zip" -f maven-integration-testing/pom.xml
 
-      - name: Upload artifact on integration test processing log
+      - name: Upload artifact on integration test
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: ${{ github.run_number }}-integration-test-log
-          path: ./core-it-suit/target/test-classes/
+          name: ${{ github.run_number }}-integration-test-artifact
+          path: ./maven-integration-testing/core-it-suit/target/test-classes/
