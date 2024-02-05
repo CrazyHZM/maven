@@ -42,6 +42,8 @@ import org.apache.maven.plugin.PluginNotFoundException;
 import org.apache.maven.plugin.PluginResolutionException;
 import org.apache.maven.plugin.descriptor.MojoDescriptor;
 import org.apache.maven.project.MavenProject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Lifecycle mapping delegate component interface. Calculates project build execution plan given {@link Lifecycle} and
@@ -51,6 +53,8 @@ import org.apache.maven.project.MavenProject;
 @Named(DefaultLifecycleMappingDelegate.HINT)
 @Singleton
 public class DefaultLifecycleMappingDelegate implements LifecycleMappingDelegate {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     public static final String HINT = "default";
 
     private final BuildPluginManager pluginManager;
@@ -88,9 +92,11 @@ public class DefaultLifecycleMappingDelegate implements LifecycleMappingDelegate
          * phases of interest and only those are in the lifecycle mapping, if a phase has no value in the map, we are
          * not interested in any of the executions bound to it.
          */
-
         for (Plugin plugin : project.getBuild().getPlugins()) {
+            logger.info("DefaultLifecycleMappingDelegate: project" + project + " ,【plugin】" + plugin.getId());
             for (PluginExecution execution : plugin.getExecutions()) {
+                logger.info("DefaultLifecycleMappingDelegate: project" + project + " ,【plugin】" + plugin.getId()
+                        + " ,【Execution】" + execution.getId());
                 // if the phase is specified then I don't have to go fetch the plugin yet and pull it down
                 // to examine the phase it is associated to.
                 if (execution.getPhase() != null) {
@@ -128,7 +134,8 @@ public class DefaultLifecycleMappingDelegate implements LifecycleMappingDelegate
             for (List<MojoExecution> executions : entry.getValue().values()) {
                 mojoExecutions.addAll(executions);
             }
-
+            logger.info("DefaultLifecycleMappingDelegate: project" + project + " ,【entry】" + entry.getKey()
+                    + " ,【Executions】" + mojoExecutions);
             lifecycleMappings.put(entry.getKey(), mojoExecutions);
         }
 
