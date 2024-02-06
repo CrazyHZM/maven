@@ -95,7 +95,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
 
         Map<Plugin, Plugin> plugins = new LinkedHashMap<>();
 
-        logger.debug("getPluginsBoundByDefaultToAllLifecycles: packaging = "+packaging);
+        logger.debug("getPluginsBoundByDefaultToAllLifecycles: packaging = " + packaging);
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
@@ -112,7 +112,8 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                 for (Map.Entry<String, LifecyclePhase> goalsForLifecyclePhase : phaseToGoalMapping.entrySet()) {
                     String phase = goalsForLifecyclePhase.getKey();
                     LifecyclePhase goals = goalsForLifecyclePhase.getValue();
-                    logger.debug("getPluginsBoundByDefaultToAllLifecycles: goalsForLifecyclePhase phase= "+phase+" ,goals="+goals);
+                    logger.debug("getPluginsBoundByDefaultToAllLifecycles: goalsForLifecyclePhase phase= " + phase
+                            + " ,goals=" + goals);
                     if (goals != null) {
                         parseLifecyclePhaseDefinitions(plugins, phase, goals);
                     }
@@ -193,7 +194,8 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                 if (mojo.getDependencies() != null) {
                     plugin.setDependencies(mojo.getDependencies());
                 }
-                logger.debug("parseLifecyclePhaseDefinitions: plugin = "+plugin.getId()+" execution = "+execution.getId());
+                logger.debug("parseLifecyclePhaseDefinitions: plugin = " + plugin.getId() + " execution = "
+                        + execution.getId());
                 plugin.getExecutions().add(execution);
             }
         }
