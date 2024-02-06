@@ -197,8 +197,10 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                 if (mojo.getDependencies() != null) {
                     plugin.setDependencies(mojo.getDependencies());
                 }
-                logger.debug("parseLifecyclePhaseDefinitions: plugin = " + plugin.getId() + " execution = "
-                        + execution.getId());
+                if (logger.isDebugEnabled() && !plugin.getId().contains("maven-compiler-plugin")) {
+                    logger.debug("parseLifecyclePhaseDefinitions: plugin = " + plugin.getId() + " execution = "
+                            + execution.getId());
+                }
                 plugin.getExecutions().add(execution);
             }
         }
