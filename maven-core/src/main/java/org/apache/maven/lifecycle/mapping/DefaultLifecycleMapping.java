@@ -62,7 +62,7 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
      */
     private void initLifecycleMap() {
         if (lifecycleMap == null) {
-            lifecycleMap = new ConcurrentHashMap<>();
+            lifecycleMap = new HashMap<>();
 
             if (lifecycles != null) {
                 for (Lifecycle lifecycle : lifecycles) {
