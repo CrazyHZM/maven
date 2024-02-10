@@ -16,37 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.maven.di;
+package org.apache.maven.api.services.xml;
 
-import java.lang.annotation.Annotation;
+import org.apache.maven.api.annotations.Experimental;
+import org.apache.maven.api.plugin.descriptor.PluginDescriptor;
 
-import org.apache.maven.di.impl.InjectorImpl;
-
-public interface Injector {
-
-    //
-    // Builder API
-    //
-
-    static Injector create() {
-        return new InjectorImpl();
-    }
-
-    Injector discover(ClassLoader classLoader);
-
-    Injector bindScope(Class<? extends Annotation> scopeAnnotation, Scope scope);
-
-    Injector bindImplicit(Class<?> cls);
-
-    <T> Injector bindInstance(Class<T> cls, T instance);
-
-    //
-    // Bean access
-    //
-
-    <T> void injectInstance(T instance);
-
-    <T> T getInstance(Class<T> key);
-
-    <T> T getInstance(Key<T> key);
-}
+/**
+ * Reads and writes a {@link PluginDescriptor} object to/from XML.
+ *
+ * @since 4.0.0
+ */
+@Experimental
+public interface PluginXmlFactory extends XmlFactory<PluginDescriptor> {}

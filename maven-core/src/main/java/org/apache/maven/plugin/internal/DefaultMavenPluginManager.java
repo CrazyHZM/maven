@@ -37,6 +37,7 @@ import org.apache.maven.api.xml.XmlNode;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.classrealm.ClassRealmManager;
 import org.apache.maven.di.Injector;
+import org.apache.maven.di.Key;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.execution.scope.internal.MojoExecutionScope;
 import org.apache.maven.execution.scope.internal.MojoExecutionScopeModule;
@@ -526,24 +527,16 @@ public class DefaultMavenPluginManager implements MavenPluginManager {
         org.apache.maven.api.plugin.Log log = new DefaultLog(
                 LoggerFactory.getLogger(mojoExecution.getMojoDescriptor().getFullGoalName()));
         try {
-            Set<String> classes = new HashSet<>();
-            try (InputStream is = pluginRealm.getResourceAsStream("META-INF/maven/org.apache.maven.api.di.Inject");
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))) {
-                reader.lines().forEach(classes::add);
-            }
             Injector injector = Injector.create();
+            injector.discover(pluginRealm);
             // Add known classes
             // TODO: get those from the existing plexus scopes ?
             injector.bindInstance(Session.class, sessionV4);
             injector.bindInstance(Project.class, project);
             injector.bindInstance(org.apache.maven.api.MojoExecution.class, execution);
             injector.bindInstance(org.apache.maven.api.plugin.Log.class, log);
-            // Add plugin classes
-            for (String className : classes) {
-                Class<?> clazz = pluginRealm.loadClass(className);
-                injector.bindImplicit(clazz);
-            }
-            mojo = mojoInterface.cast(injector.getInstance(mojoDescriptor.getImplementationClass()));
+            mojo = mojoInterface.cast(injector.getInstance(
+                    Key.of(mojoDescriptor.getImplementationClass(), mojoDescriptor.getRoleHint())));
 
         } catch (Exception e) {
             throw new PluginContainerException(mojoDescriptor, pluginRealm, "Unable to lookup Mojo", e);
