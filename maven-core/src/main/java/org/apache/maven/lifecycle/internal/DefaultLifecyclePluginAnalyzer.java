@@ -95,7 +95,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
 
         Map<Plugin, Plugin> plugins = new LinkedHashMap<>();
         if (logger.isDebugEnabled()) {
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles:  packaging = " + packaging);
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  packaging = " + packaging);
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
