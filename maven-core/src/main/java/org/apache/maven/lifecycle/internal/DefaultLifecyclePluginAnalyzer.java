@@ -143,7 +143,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
 
         List<LifecycleMojo> mojos = goals.getMojos();
         if (logger.isDebugEnabled()) {
-            logger.debug("parseLifecyclePhaseDefinitions: mojos = " + mojos.size());
+            logger.debug("parseLifecyclePhaseDefinitions : mojos = " + mojos.size());
         }
         if (mojos != null) {
 
