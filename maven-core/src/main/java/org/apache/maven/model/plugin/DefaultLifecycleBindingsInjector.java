@@ -23,6 +23,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -43,6 +44,8 @@ import org.apache.maven.model.building.ModelProblem.Version;
 import org.apache.maven.model.building.ModelProblemCollector;
 import org.apache.maven.model.building.ModelProblemCollectorRequest;
 import org.apache.maven.model.merge.MavenModelMerger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles injection of plugin executions induced by the lifecycle bindings for a packaging.
@@ -55,6 +58,8 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
     private final LifecycleBindingsMerger merger = new LifecycleBindingsMerger();
 
     private final LifeCyclePluginAnalyzer lifecycle;
+
+    private static final Logger logger = LoggerFactory.getLogger(DefaultLifecycleBindingsInjector.class);
 
     @Inject
     public DefaultLifecycleBindingsInjector(LifeCyclePluginAnalyzer lifecycle) {
@@ -114,6 +119,12 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 boolean sourceDominant,
                 Map<Object, Object> context) {
             List<Plugin> src = source.getPlugins();
+
+            logger.debug("[test]mergePluginContainer_Plugins: target: "
+                    + Arrays.toString(
+                            target.getPlugins().stream().map(Plugin::getId).toArray()) + ", source: "
+                    + Arrays.toString(
+                            source.getPlugins().stream().map(Plugin::getId).toArray()));
             if (!src.isEmpty()) {
                 List<Plugin> tgt = target.getPlugins();
 
@@ -153,7 +164,8 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 }
 
                 List<Plugin> result = new ArrayList<>(merged.values());
-
+                logger.debug("[test]mergePluginContainer_Plugins: result: "
+                        + Arrays.toString(result.stream().map(Plugin::getId).toArray()));
                 builder.plugins(result);
             }
         }
