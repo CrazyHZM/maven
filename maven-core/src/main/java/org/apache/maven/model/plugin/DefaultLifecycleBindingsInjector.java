@@ -120,6 +120,18 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 Map<Object, Object> context) {
             List<Plugin> src = source.getPlugins();
 
+            for (Plugin plugin : target.getPlugins()) {
+                if (!plugin.getId().contains("maven-compiler-plugin")) {
+                    LOGGER.debug("[test]mergePluginContainer_Plugins: target: " + plugin.getId());
+                }
+            }
+
+            for (Plugin plugin : source.getPlugins()) {
+                if (!plugin.getId().contains("maven-compiler-plugin")) {
+                    LOGGER.debug("[test]mergePluginContainer_Plugins: source: " + plugin.getId());
+                }
+            }
+
             LOGGER.debug("[test]mergePluginContainer_Plugins: target: "
                     + Arrays.toString(
                             target.getPlugins().stream().map(Plugin::getId).toArray()) + ", source: "
@@ -164,8 +176,12 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 }
 
                 List<Plugin> result = new ArrayList<>(merged.values());
-                LOGGER.debug("[test]mergePluginContainer_Plugins: result: "
-                        + Arrays.toString(result.stream().map(Plugin::getId).toArray()));
+
+                for (Plugin plugin : result) {
+                    if (!plugin.getId().contains("maven-compiler-plugin")) {
+                        LOGGER.debug("[test]mergePluginContainer_Plugins: result: " + plugin.getId());
+                    }
+                }
                 builder.plugins(result);
             }
         }
