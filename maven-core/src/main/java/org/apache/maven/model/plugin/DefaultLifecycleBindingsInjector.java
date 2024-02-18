@@ -59,7 +59,7 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
 
     private final LifeCyclePluginAnalyzer lifecycle;
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultLifecycleBindingsInjector.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultLifecycleBindingsInjector.class);
 
     @Inject
     public DefaultLifecycleBindingsInjector(LifeCyclePluginAnalyzer lifecycle) {
@@ -120,7 +120,7 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 Map<Object, Object> context) {
             List<Plugin> src = source.getPlugins();
 
-            logger.debug("[test]mergePluginContainer_Plugins: target: "
+            LOGGER.debug("[test]mergePluginContainer_Plugins: target: "
                     + Arrays.toString(
                             target.getPlugins().stream().map(Plugin::getId).toArray()) + ", source: "
                     + Arrays.toString(
@@ -164,7 +164,7 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 }
 
                 List<Plugin> result = new ArrayList<>(merged.values());
-                logger.debug("[test]mergePluginContainer_Plugins: result: "
+                LOGGER.debug("[test]mergePluginContainer_Plugins: result: "
                         + Arrays.toString(result.stream().map(Plugin::getId).toArray()));
                 builder.plugins(result);
             }
