@@ -105,7 +105,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
 
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleConfiguration=" + lifecycleConfiguration);
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  getDefaultLifecyclePhases="
-                    + lifecycle.getDefaultLifecyclePhases());
+                    + lifecycle.getDefaultLifecyclePhases().size());
 
             Map<String, LifecyclePhase> phaseToGoalMapping = null;
 
