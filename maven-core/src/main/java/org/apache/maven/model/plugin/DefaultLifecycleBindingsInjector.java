@@ -23,7 +23,6 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -132,11 +131,6 @@ public class DefaultLifecycleBindingsInjector implements LifecycleBindingsInject
                 }
             }
 
-            LOGGER.debug("[test]mergePluginContainer_Plugins: target: "
-                    + Arrays.toString(
-                            target.getPlugins().stream().map(Plugin::getId).toArray()) + ", source: "
-                    + Arrays.toString(
-                            source.getPlugins().stream().map(Plugin::getId).toArray()));
             if (!src.isEmpty()) {
                 List<Plugin> tgt = target.getPlugins();
 
