@@ -104,8 +104,6 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
 
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleConfiguration=" + lifecycleConfiguration);
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  getDefaultLifecyclePhases="
-                    + lifecycle.getDefaultLifecyclePhases().size());
 
             Map<String, LifecyclePhase> phaseToGoalMapping = null;
 
@@ -113,6 +111,8 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                 phaseToGoalMapping = lifecycleConfiguration.getLifecyclePhases();
             } else if (lifecycle.getDefaultLifecyclePhases() != null) {
                 phaseToGoalMapping = lifecycle.getDefaultLifecyclePhases();
+                logger.debug("getPluginsBoundByDefaultToAllLifecycles :  getDefaultLifecyclePhases="
+                        + lifecycle.getDefaultLifecyclePhases().size());
             }
 
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  phaseToGoalMapping=" + phaseToGoalMapping);
