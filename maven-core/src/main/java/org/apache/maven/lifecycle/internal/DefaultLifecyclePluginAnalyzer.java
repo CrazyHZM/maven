@@ -100,8 +100,6 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                     + defaultLifeCycles.getLifeCycles().size());
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleMappingForPackaging="
-                    + lifecycleMappingForPackaging);
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
 
