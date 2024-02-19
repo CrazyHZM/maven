@@ -96,10 +96,16 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
         Map<Plugin, Plugin> plugins = new LinkedHashMap<>();
         if (logger.isDebugEnabled()) {
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  packaging = " + packaging);
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  defaultLifeCycles="
+                    + defaultLifeCycles.getLifeCycles().size());
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
+
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleConfiguration=" + lifecycleConfiguration);
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  getDefaultLifecyclePhases="
+                    + lifecycle.getDefaultLifecyclePhases());
 
             Map<String, LifecyclePhase> phaseToGoalMapping = null;
 
@@ -109,6 +115,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                 phaseToGoalMapping = lifecycle.getDefaultLifecyclePhases();
             }
 
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  phaseToGoalMapping=" + phaseToGoalMapping);
             if (phaseToGoalMapping != null) {
                 for (Map.Entry<String, LifecyclePhase> goalsForLifecyclePhase : phaseToGoalMapping.entrySet()) {
                     String phase = goalsForLifecyclePhase.getKey();
