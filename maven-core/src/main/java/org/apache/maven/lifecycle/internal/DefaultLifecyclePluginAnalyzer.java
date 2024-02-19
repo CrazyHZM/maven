@@ -100,15 +100,17 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                     + defaultLifeCycles.getLifeCycles().size());
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleMappingForPackaging="
+                    + lifecycleMappingForPackaging);
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
-
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleConfiguration=" + lifecycleConfiguration);
 
             Map<String, LifecyclePhase> phaseToGoalMapping = null;
 
             if (lifecycleConfiguration != null) {
                 phaseToGoalMapping = lifecycleConfiguration.getLifecyclePhases();
+                logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleConfiguration="
+                        + lifecycleConfiguration.getLifecyclePhases());
             } else if (lifecycle.getDefaultLifecyclePhases() != null) {
                 phaseToGoalMapping = lifecycle.getDefaultLifecyclePhases();
                 logger.debug("getPluginsBoundByDefaultToAllLifecycles :  getDefaultLifecyclePhases="

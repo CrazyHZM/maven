@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
@@ -35,9 +38,13 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
 
     private Map<String, Lifecycle> lifecycleMap;
 
-    /** @deprecated use lifecycles instead */
+    /**
+     * @deprecated use lifecycles instead
+     */
     @Deprecated
     private Map<String, LifecyclePhase> phases;
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * Default ctor for plexus compatibility: lifecycles are most commonly defined in Plexus XML, that does field
@@ -78,6 +85,7 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
                 for (String lifecycleId : lifecycleIds) {
                     Map<String, LifecyclePhase> phases = getLifecyclePhases(lifecycleId);
                     if (phases != null) {
+                        logger.debug("initLifecycleMap phases: " + phases);
                         Lifecycle lifecycle = new Lifecycle();
 
                         lifecycle.setId(lifecycleId);
@@ -94,6 +102,9 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
     public Map<String, Lifecycle> getLifecycles() {
         initLifecycleMap();
 
+        if (lifecycleMap != null) {
+            logger.debug("getLifecycles lifecycleMap:" + lifecycleMap.size());
+        }
         return lifecycleMap;
     }
 
@@ -109,10 +120,13 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
         Lifecycle lifecycleMapping = lifecycleMap.get(lifecycle);
 
         if (lifecycleMapping != null) {
+            logger.debug("getLifecyclePhases getLifecyclePhases: " + lifecycleMapping.getLifecyclePhases());
             return lifecycleMapping.getLifecyclePhases();
         } else if ("default".equals(lifecycle)) {
+            logger.debug("getLifecyclePhases phases: " + phases);
             return phases;
         } else {
+            logger.debug("getLifecyclePhases null");
             return null;
         }
     }
