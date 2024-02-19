@@ -115,8 +115,9 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                         + lifecycle.getDefaultLifecyclePhases().toString().replace("maven-compiler-plugin", ""));
             }
 
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  phaseToGoalMapping=" + phaseToGoalMapping);
             if (phaseToGoalMapping != null) {
+                logger.debug("getPluginsBoundByDefaultToAllLifecycles :  phaseToGoalMapping="
+                        + phaseToGoalMapping.toString().replace("maven-compiler-plugin", ""));
                 for (Map.Entry<String, LifecyclePhase> goalsForLifecyclePhase : phaseToGoalMapping.entrySet()) {
                     String phase = goalsForLifecyclePhase.getKey();
                     LifecyclePhase goals = goalsForLifecyclePhase.getValue();
