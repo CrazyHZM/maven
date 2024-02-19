@@ -85,7 +85,7 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
                 for (String lifecycleId : lifecycleIds) {
                     Map<String, LifecyclePhase> phases = getLifecyclePhases(lifecycleId);
                     if (phases != null) {
-                        logger.debug("initLifecycleMap phases: " + phases);
+                        logger.debug("initLifecycleMap phases: " + phases.size());
                         Lifecycle lifecycle = new Lifecycle();
 
                         lifecycle.setId(lifecycleId);
@@ -103,7 +103,7 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
         initLifecycleMap();
 
         if (lifecycleMap != null) {
-            logger.debug("getLifecycles lifecycleMap:" + lifecycleMap.size());
+            logger.debug("getLifecycles lifecycleMap:" + lifecycleMap.toString().replace("maven-compiler-plugin", ""));
         }
         return lifecycleMap;
     }
@@ -120,10 +120,11 @@ public class DefaultLifecycleMapping implements LifecycleMapping {
         Lifecycle lifecycleMapping = lifecycleMap.get(lifecycle);
 
         if (lifecycleMapping != null) {
-            logger.debug("getLifecyclePhases getLifecyclePhases: " + lifecycleMapping.getLifecyclePhases());
+            logger.debug("getLifecyclePhases getLifecyclePhases: "
+                    + lifecycleMapping.getLifecyclePhases().toString().replace("maven-compiler-plugin", ""));
             return lifecycleMapping.getLifecyclePhases();
         } else if ("default".equals(lifecycle)) {
-            logger.debug("getLifecyclePhases phases: " + phases);
+            logger.debug("getLifecyclePhases phases: " + phases.toString().replace("maven-compiler-plugin", ""));
             return phases;
         } else {
             logger.debug("getLifecyclePhases null");

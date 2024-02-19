@@ -97,7 +97,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
         if (logger.isDebugEnabled()) {
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  packaging = " + packaging);
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  defaultLifeCycles="
-                    + defaultLifeCycles.getLifeCycles().size());
+                    + defaultLifeCycles.getLifeCycles().toString().replace("maven-compiler-plugin", ""));
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
@@ -108,11 +108,11 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
             if (lifecycleConfiguration != null) {
                 phaseToGoalMapping = lifecycleConfiguration.getLifecyclePhases();
                 logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleConfiguration="
-                        + lifecycleConfiguration.getLifecyclePhases());
+                        + lifecycleConfiguration.getLifecyclePhases().toString().replace("maven-compiler-plugin", ""));
             } else if (lifecycle.getDefaultLifecyclePhases() != null) {
                 phaseToGoalMapping = lifecycle.getDefaultLifecyclePhases();
                 logger.debug("getPluginsBoundByDefaultToAllLifecycles :  getDefaultLifecyclePhases="
-                        + lifecycle.getDefaultLifecyclePhases().size());
+                        + lifecycle.getDefaultLifecyclePhases().toString().replace("maven-compiler-plugin", ""));
             }
 
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  phaseToGoalMapping=" + phaseToGoalMapping);
