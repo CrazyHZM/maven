@@ -93,6 +93,9 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
             return null;
         }
 
+        logger.debug("getPluginsBoundByDefaultToAllLifecycles:  lifecycleMappingForPackaging="
+                + lifecycleMappingForPackaging.toString().replace("maven-compiler-plugin", ""));
+
         Map<Plugin, Plugin> plugins = new LinkedHashMap<>();
         if (logger.isDebugEnabled()) {
             logger.debug("getPluginsBoundByDefaultToAllLifecycles :  packaging = " + packaging);
@@ -100,7 +103,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                     + defaultLifeCycles.getLifeCycles().toString().replace("maven-compiler-plugin", ""));
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles:  lifecycleMappingForPackaging="
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles:  lifecycleMappingForPackaging.getLifecycles="
                     + lifecycleMappingForPackaging.getLifecycles().toString().replace("maven-compiler-plugin", ""));
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
