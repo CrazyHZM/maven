@@ -100,7 +100,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
                     + defaultLifeCycles.getLifeCycles().toString().replace("maven-compiler-plugin", ""));
         }
         for (Lifecycle lifecycle : defaultLifeCycles.getLifeCycles()) {
-            logger.debug("getPluginsBoundByDefaultToAllLifecycles :  lifecycleMappingForPackaging="
+            logger.debug("getPluginsBoundByDefaultToAllLifecycles:  lifecycleMappingForPackaging="
                     + lifecycleMappingForPackaging.getLifecycles().toString().replace("maven-compiler-plugin", ""));
             org.apache.maven.lifecycle.mapping.Lifecycle lifecycleConfiguration =
                     lifecycleMappingForPackaging.getLifecycles().get(lifecycle.getId());
