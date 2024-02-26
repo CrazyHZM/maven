@@ -93,7 +93,7 @@ public class DefaultLifecyclePluginAnalyzer implements LifeCyclePluginAnalyzer {
             return null;
         }
 
-        logger.debug("getPluginsBoundByDefaultToAllLifecycles : packaging " + packaging
+        logger.debug("getPluginsBoundByDefaultToAllLifecycles: packaging " + packaging
                 + ", lifecycleMappingForPackaging=" + lifecycleMappingForPackaging.hashCode());
 
         Map<Plugin, Plugin> plugins = new LinkedHashMap<>();
